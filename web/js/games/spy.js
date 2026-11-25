@@ -105,9 +105,10 @@
         ]));
 
         function revealCard() {
-          vibrate(15); sfx.tap();
           const card = host.querySelector('.tap-card');
-          if (!card) return;
+          if (!card || card.dataset.done === '1') return;
+          card.dataset.done = '1';
+          vibrate(15); sfx.tap();
           card.innerHTML = '';
           if (isSpy) {
             card.appendChild(h('div', { class: 'who', text: 'তুমি হলোে' }));
