@@ -1,0 +1,6 @@
+out/
+sdk/android.jar
+android/assets/
+*.idsig
+*.apk
+.DS_Store
