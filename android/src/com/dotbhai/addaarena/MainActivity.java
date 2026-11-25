@@ -105,13 +105,16 @@ public class MainActivity extends Activity {
             headers.put("Cache-Control", "no-cache");
             return new WebResourceResponse(mime(path), "utf-8", 200, "OK", headers, in);
         } catch (IOException e) {
-            // SPA-ish fallback for unknown routes
-            try {
-                InputStream in = getAssets().open("web/index.html");
-                return new WebResourceResponse("text/html", "utf-8", in);
-            } catch (IOException ignored) {
-                return null;
+            // only HTML navigation falls back to the shell; missing assets are a real 404
+            if (path.indexOf('.') < 0) {
+                try {
+                    InputStream in = getAssets().open("web/index.html");
+                    return new WebResourceResponse("text/html", "utf-8", in);
+                } catch (IOException ignored) {
+                }
             }
+            return new WebResourceResponse("text/plain", "utf-8", 404, "Not Found",
+                    new HashMap<String, String>(), new java.io.ByteArrayInputStream(new byte[0]));
         }
     }
 

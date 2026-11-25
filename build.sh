@@ -33,8 +33,8 @@ aapt2 link -o "$OUT/base.apk" \
   -A android/assets \
   --min-sdk-version 24 \
   --target-sdk-version 35 \
-  --version-code 1 \
-  --version-name 1.0
+  --version-code 2 \
+  --version-name 1.0.1
 
 echo "[4/6] compiling java"
 find android/src "$OUT/gen" -name '*.java' > "$OUT/sources.txt"
